@@ -1,0 +1,408 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Mon Apr 10 20:37:26 2023                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v19.16-s053_1 (64bit) 08/31/2020 13:16 (Linux 2.6.32-431.11.2.el6.x86_64)
+#@(#)CDS: NanoRoute 19.16-s053_1 NR200827-1939/19_16-UB (database version 18.20, 510.7.1) {superthreading v1.53}
+#@(#)CDS: AAE 19.16-s019 (64bit) 08/31/2020 (Linux 2.6.32-431.11.2.el6.x86_64)
+#@(#)CDS: CTE 19.16-s019_1 () Aug 22 2020 00:37:42 ( )
+#@(#)CDS: SYNTECH 19.16-s010_1 () Aug 17 2020 09:10:13 ( )
+#@(#)CDS: CPE v19.16-s038
+#@(#)CDS: IQuantus/TQuantus 19.1.3-s268 (64bit) Mon Aug 10 22:57:12 PDT 2020 (Linux 2.6.32-431.11.2.el6.x86_64)
+
+alias fs set top_design fifo1_sram
+alias f set top_design fifo1
+alias o set top_design ORCA_TOP
+alias e set top_design ExampleRocketSystem
+set_table_style -name report_timing -max_widths { 8,6,23,70} -no_frame_fix_width
+set_global report_timing_format  {delay arrival slew cell hpin}
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+win
+fs
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+set search_path {}
+set init_lef_file {../../cadence_cap_tech/tech.lef saed32sram.lef saed32nm_lvt_1p9m.lef saed32_io_wb_all.lef saed32_PLL.lef saed32nm_hvt_1p9m.lef saed32nm_rvt_1p9m.lef}
+set init_mmmc_file mmmc.tcl
+set init_design_netlisttype Verilog
+set init_verilog ../../syn/outputs/fifo1_sram.genus_phys.vg
+set init_top_cell fifo1_sram
+set init_pwr_net VDD
+set init_gnd_net VSS
+init_design
+defIn ../outputs/fifo1_sram.floorplan.innovus.def
+add_tracks -honor_pitch
+setNanoRouteMode -drouteEndIteration 10
+all_constraint_modes -active
+set_interactive_constraint_modes [all_constraint_modes -active]
+create_clock -name "wclk" -period $wclk_period  wclk
+set_clock_uncertainty -setup 0.07 wclk
+set_clock_uncertainty -hold 0.01 wclk
+set_clock_transition 0.2 wclk
+set_clock_latency 0.1 wclk
+create_clock -name "rclk" -period $rclk_period rclk
+set_clock_uncertainty -setup 0.07 rclk
+set_clock_uncertainty -hold 0.01 rclk
+set_clock_transition 0.2 rclk
+set_clock_latency 0.1 rclk
+create_clock -name "wclk2x" -period $wclk2x_period wclk2x
+set_clock_uncertainty 0.07 -setup wclk2x
+set_clock_uncertainty 0.01 -hold wclk2x
+set_clock_transition 0.2 wclk2x
+set_clock_latency 0.1 wclk2x
+set_false_path -from [get_clocks wclk ] -to [get_clocks rclk]
+set_false_path -from [get_clocks rclk ] -to [ get_clocks wclk]
+set_input_delay 0.0 wdata_in* -clock wclk2x
+set_input_delay 0.0 winc -clock wclk
+set_input_delay 0.0 rinc -clock rclk
+set_output_delay -0.5 rdata* -clock rclk
+set_output_delay -0.5 {rempty } -clock rclk
+set_output_delay -0.5 { wfull } -clock wclk
+set_input_delay 0.0 rrst_n -clock rclk
+set_input_delay 0.0 rrst_n -clock wclk -add_delay
+set_input_delay 0.0 rrst_n -clock wclk2x -add_delay
+set_drive 0.00001 [all_inputs ]
+set_load 0.5 [all_outputs]
+group_path -name INPUTS -from [ get_ports -filter "direction==in&&full_name!~*clk*" ]
+group_path -name OUTPUTS -to [ get_ports -filter "direction==out" ]
+setDontUse *DELLN* true
+createBasicPathGroups -expanded
+saveDesign fifo1_sram_floorplan.innovus
+setOptMode -usefulSkew false
+setOptMode -usefulSkewCCOpt none
+setOptMode -usefulSkewPostRoute false
+setOptMode -usefulSkewPreCTS false
+place_opt_design
+redirect -tee ../reports/fifo1_sram.innovus.place.congestion.2d.rpt { reportCongestion -hotSpot -overflow -includeBlockage }
+redirect -tee ../reports/fifo1_sram.innovus.place.congestion.3d.rpt { reportCongestion -hotSpot -overflow -includeBlockage -3d }
+timeDesign -preCTS -prefix place -outDir ../reports/fifo1_sram.innovus -expandedViews
+redirect -tee ../reports/fifo1_sram.innovus.place.density.rpt { reportDensityMap }
+summaryReport -noHtml -outfile ../reports/fifo1_sram.innovus.place.summary.rpt
+saveDesign fifo1_sram_place.innovus
+setDesignMode -process 28
+setOptMode -usefulSkew false
+setOptMode -usefulSkewCCOpt none
+setOptMode -usefulSkewPostRoute false
+setOptMode -usefulSkewPreCTS false
+set_ccopt_property update_io_latency false
+set_ccopt_property routing_top_min_fanout 10000
+add_ndr -name CTS_RULE -spacing {M1 0.1 M2:M8 0.112 } -width_multiplier {M3:M8 2 } -generate_via
+create_route_type -name top_type -non_default_rule CTS_RULE -top_preferred_layer M8 -bottom_preferred_layer M7
+set_ccopt_property -net_type top route_type top_type
+create_route_type -name trunk_type -non_default_rule CTS_RULE -top_preferred_layer M6 -bottom_preferred_layer M5
+set_ccopt_property -net_type trunk route_type trunk_type
+setNanoRouteMode -droutePostRouteSpreadWire false
+ccopt_design
+setAnalysisMode -analysisType onChipVariation
+setAnalysisMode -cppr both
+optDesign -postCTS -hold
+report_ccopt_skew_groups -summary -file ../reports/fifo1_sram.innovus.postcts.ccopt_skew_groups.rpt
+report_ccopt_clock_trees -summary -file ../reports/fifo1_sram.innovus.postcts.ccopt_clock_trees.rpt
+timeDesign -postCTS -prefix postcts -outDir ../reports/fifo1_sram.innovus -expandedViews
+timeDesign -postCTS -hold -prefix postcts -outDir ../reports/fifo1_sram.innovus -expandedViews
+redirect -tee ../reports/fifo1_sram.innovus.postcts.density.rpt { reportDensityMap }
+summaryReport -noHtml -outfile ../reports/fifo1_sram.innovus.postcts.summary.rpt
+saveDesign fifo1_sram_postcts.innovus
+setOptMode -usefulSkew false
+setOptMode -usefulSkewCCOpt none
+setOptMode -usefulSkewPostRoute false
+setOptMode -usefulSkewPreCTS false
+setNanoRouteMode -droutePostRouteSpreadWire false
+routeDesign
+optDesign -postRoute -setup -hold
+globalNetConnect VDD -type pgpin -pin VDD -inst *
+globalNetConnect VSS -type pgpin -pin VSS -inst *
+saveDesign fifo1_sram_route.innovus
+report_ccopt_skew_groups -summary -file ../reports/fifo1_sram.innovus.route.ccopt_skew_groups.rpt
+report_ccopt_clock_trees -summary -file ../reports/fifo1_sram.innovus.route.ccopt_clock_trees.rpt
+verify_drc -limit 100000 -report ../reports/fifo1_sram.innovus.route.drc.all.rpt
+verify_drc -limit 100000 -check_only regular -report ../reports/fifo1_sram.innovus.route.drc.regular.rpt
+verifyConnectivity -error 100000 -noAntenna -report ../reports/fifo1_sram.innovus.route.connectivity.rpt
+timeDesign -postRoute -prefix route -outDir ../reports/fifo1_sram.innovus -expandedViews
+timeDesign -postRoute -si -prefix route_si -outDir ../reports/fifo1_sram.innovus -expandedViews
+timeDesign -postRoute -hold -prefix route -outDir ../reports/fifo1_sram.innovus -expandedViews
+timeDesign -postRoute -hold -si -prefix route_si -outDir ../reports/fifo1_sram.innovus -expandedViews
+report_power > ../reports/fifo1_sram.innovus.route.power.rpt
+redirect -tee ../reports/fifo1_sram.innovus.route.density.rpt { reportDensityMap }
+summaryReport -noHtml -outfile ../reports/fifo1_sram.innovus.route.summary.rpt
+saveNetlist ../outputs/fifo1_sram.route.innovus.vg
+saveModel -spef -dir fifo1_sram_route_spef
+gui_show_edge_number
+selectMarker 295.0000 295.0000 905.0960 905.0960 -1 3 7
+fit
+setDrawView ameba
+deselectAll
+report_timing -machine_readable -path_group reg2reg > foo.mtarpt
+report_timing -from wdata_in[2] -to wdata_reg_2_/D -group INPUTS -output_format gtd > timepathinput.mtarpt
+report_timing -from wdata_in[2] -to wdata_reg_2_/D -group INPUTS -output_format gtd > timepathinput.mtarpt
+report_timing -from wdata_in[2] -to wdata_reg_2_/D  -output_format gtd > timepathinput.mtarpt
+setLayerPreference node_layer -isVisible 0
+setLayerPreference violation -isVisible 0
+report_timing -machine_readable -path_group reg2reg 
+report_timing -machine_readable -path_group reg2reg > foo.mtarpt
+selectInst fifomem/genblk1_0__U
+deselectAll
+selectInst fifomem/genblk1_0__U
+deselectAll
+selectInst fifomem/genblk1_0__U
+deselectAll
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report foo.mtarpt
+zoomBox -405.03300 24.51400 1663.74300 765.93900
+zoomBox -616.87900 -60.00500 1816.97500 812.26000
+zoomBox -385.71400 11.12300 1683.06200 752.54800
+zoomBox -145.56000 84.27000 1612.90100 714.48200
+zoomBox -525.29300 -36.75700 1908.56400 835.50900
+zoomBox -761.09500 -115.53000 2102.26700 910.66600
+setLayerPreference node_layer -isVisible 1
+setLayerPreference violation -isVisible 1
+zoomBox -417.85400 -60.00200 2016.00500 812.26500
+zoomBox -759.28900 -116.04700 2104.07600 910.15000
+zoomBox -423.02000 -53.54500 2010.84000 818.72200
+zoomBox -759.28900 -116.04700 2104.07600 910.15000
+panPage 0 1
+panPage 0 -1
+zoomBox -424.57000 -52.51300 2009.29100 819.75500
+zoomBox -140.06000 1.49100 1928.72300 742.91900
+panPage 0 1
+zoomBox 88.33900 268.89000 1846.80500 899.10400
+zoomBox 281.84300 307.43200 1776.54000 843.11400
+panPage -1 0
+panPage -1 0
+panPage 1 0
+selectInst wptr_full/wbin_reg_3_
+zoomSelected
+editSelect -net wptr_full/n_26
+zoomSelected
+selectInst wptr_full/FE_OFC170_n_26
+zoomSelected
+selectInst wptr_full/wbin_reg_3_
+zoomSelected
+editSelect -net wptr_full/n_26
+zoomSelected
+editSelect -net wptr_full/n_26
+zoomSelected
+selectInst wptr_full/FE_OFC170_n_26
+zoomSelected
+editSelect -net FE_OFN27_waddr_3
+zoomSelected
+editSelect -net FE_OFN27_waddr_3
+zoomSelected
+selectInst wptr_full/FE_RC_32_0
+zoomSelected
+editSelect -net wptr_full/FE_RN_12_0
+zoomSelected
+selectInst wptr_full/FE_RC_32_0
+zoomSelected
+editSelect -net wptr_full/FE_RN_12_0
+zoomSelected
+selectInst wptr_full/FE_RC_33_0
+zoomSelected
+selectInst wptr_full/FE_OFC170_n_26
+zoomSelected
+editSelect -net FE_OFN27_waddr_3
+zoomSelected
+selectInst wptr_full/FE_RC_32_0
+zoomSelected
+zoomBox 352.67000 539.82100 603.30000 629.64400
+fit
+selectInst io_b_wrst_n
+deselectAll
+setDrawView place
+setDrawView ameba
+setLayerPreference node_layer -isSelectable 0
+setLayerPreference node_layer -isVisible 0
+setLayerPreference violation -isSelectable 0
+setLayerPreference violation -isVisible 0
+fit
+report_timing -machine_readable -path_group INPUTS
+report_timing -machine_readable -path_group INPUTS > inputs.mtarpt
+setDrawView ameba
+setDrawView ameba
+setDrawView ameba
+setDrawView fplan
+selectObject Module fifomem
+deselectAll
+selectObject Module fifomem
+deselectAll
+selectObject Module fifomem
+deselectAll
+selectObject Module fifomem
+deselectAll
+getAnalysisMode -checkType
+getAnalysisMode -checkType
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report top.mtarpt
+getAnalysisMode -checkType
+get_time_unit
+report_timing -machine_readable -max_paths 10000 -max_slack 0.75 -path_exceptions all -early > top.mtarpt
+load_timing_debug_report -name default_report top.mtarpt
+getAnalysisMode -checkType
+get_time_unit
+report_timing -machine_readable -max_paths 10000 -max_slack 0.75 -path_exceptions all -late > top.mtarpt
+load_timing_debug_report -name default_report top.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+setDrawView ameba
+setDrawView fplan
+gui_select -rect {593.46200 564.92300 606.63400 569.31400}
+selectInst fifomem/genblk1_0__U
+deselectAll
+selectInst fifomem/genblk1_4__U
+deselectAll
+selectInst fifomem/genblk1_7__U
+deselectAll
+selectInst fifomem/genblk1_7__U
+deselectAll
+selectInst fifomem/genblk1_5__U
+deselectAll
+selectInst fifomem/genblk1_1__U
+deselectAll
+selectInst fifomem/genblk1_3__U
+deselectAll
+selectInst fifomem/genblk1_2__U
+deselectAll
+selectInst fifomem/genblk1_6__U
+deselectAll
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report foo.mtarpt
+zoomBox -267.79300 113.22600 1490.66600 1067.00200
+zoomBox 77.39400 288.67600 1157.31000 874.41500
+zoomBox 160.09200 331.04700 1078.02100 828.92600
+zoomBox 225.08600 365.98700 1005.32600 789.18400
+zoomBox 280.19100 395.68600 943.39500 755.40300
+zoomBox 364.67400 440.00500 771.96500 660.91700
+zoomBox 440.56200 470.24700 690.68900 605.91400
+panPage -1 0
+panPage -1 0
+panPage 1 0
+fit
+setDrawView ameba
+setDrawView place
+zoomBox -158.35800 30.56200 1600.10100 984.33800
+zoomBox 95.16400 116.82900 1365.65100 805.93300
+zoomBox 322.15800 242.41200 1102.39700 665.60800
+zoomBox 365.43900 277.67000 1028.64300 637.38700
+panPage -1 0
+panPage -1 0
+zoomBox 6.99800 313.08300 570.72200 618.84300
+zoomBox 61.40400 341.55700 540.57000 601.45300
+panPage 0 1
+zoomBox 120.35600 440.74700 527.64700 661.65900
+zoomBox 249.06700 486.95300 499.19500 622.62100
+zoomBox 328.81000 515.15900 482.42200 598.47700
+zoomBox 365.66900 528.00000 476.65500 588.19800
+zoomBox 391.30000 537.14900 471.48800 580.64200
+zoomBox 358.12200 526.09000 488.69700 596.91300
+fit
+zoomBox -437.74300 59.20000 1631.03300 1181.29000
+zoomBox -616.87900 -60.00500 1816.97500 1260.10100
+zoomBox -437.74300 59.20000 1631.03300 1181.29000
+zoomBox -616.87900 -60.00500 1816.97500 1260.10100
+zoomBox -291.16300 142.65400 1467.29800 1096.43100
+zoomBox -55.83200 289.07500 1214.65500 978.17900
+zoomBox 114.19200 394.86300 1032.12100 892.74200
+zoomBox 236.88200 471.60200 900.08700 831.32000
+panPage -1 0
+zoomBox 211.50400 525.92400 618.79500 746.83600
+zoomBox 290.61200 549.57500 584.88200 709.18500
+panPage 1 0
+panPage 0 -1
+panPage -1 0
+panPage -1 0
+panPage 0 -1
+panPage 1 0
+zoomBox 334.06800 468.68700 546.67900 584.00600
+zoomBox 352.76600 477.35500 533.48500 575.37600
+panPage 0 1
+panPage 0 1
+fit
+gui_select -rect {712.00800 613.22000 1060.32900 867.87400}
+deselectAll
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+report_timing -machine_readable -path_group OUTPUTS
+report_timing -machine_readable -path_group OUTPUTS > outputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report outputs.mtarpt
+getAnalysisMode -checkType
+get_time_unit
+report_timing -machine_readable -max_paths 10000 -max_slack 0.75 -path_exceptions all -late > inputs.mtarpt
+load_timing_debug_report -name default_report inputs.mtarpt
+selectInst fifomem/genblk1_5__U
+deselectAll
+zoomBox -149.27500 167.02000 1345.41700 977.73100
+zoomBox -281.71600 98.97600 1476.74600 1052.75400
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+fit
+setLayerPreference node_layer -isVisible 1
+setLayerPreference node_layer -isSelectable 1
+setLayerPreference node_layer -isSelectable 0
+setLayerPreference node_layer -isVisible 0
+setLayerPreference violation -isVisible 1
+setLayerPreference violation -isSelectable 1
+setLayerPreference violation -isSelectable 0
+setLayerPreference violation -isVisible 0
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report outputs.mtarpt
+getAnalysisMode -checkType
+get_time_unit
+report_timing -machine_readable -max_paths 10000 -max_slack 0.75 -path_exceptions all -late > outputs.mtarpt
+load_timing_debug_report -name default_report outputs.mtarpt
+zoomBox -349.24000 124.78400 1409.22000 1078.56100
+zoomBox -77.49600 312.06700 1002.42000 897.80600
+zoomBox -13.59700 355.60800 904.33100 853.48600
+zoomBox 152.63600 489.90100 631.80200 749.79700
+zoomBox 203.88800 530.99900 550.08600 718.77400
+zoomBox 140.61500 465.44200 704.34300 771.20400
+zoomBox 35.82100 358.94400 953.76100 856.82800
+zoomBox -68.48600 252.94000 1202.02000 942.05400
+zoomBox 40.69700 356.82300 958.63800 854.70800
+zoomBox -68.48600 252.94000 1202.02000 942.05400
+zoomBox -315.70600 20.12200 1753.10100 1142.22900
+zoomBox -9.47000 308.51900 1070.46200 894.26700
+zoomBox -711.99500 -82.39800 1721.90400 1237.73200
+zoomBox -1190.92800 -357.84100 2177.79000 1469.32900
+zoomBox -711.99600 -82.39800 1721.90400 1237.73300
+zoomBox -524.95300 25.17400 1543.86200 1147.28500
+zoomBox -115.96100 260.39200 1154.55100 949.50900
+zoomBox -18.32400 316.54500 1061.61200 902.29500
+zoomBox -113.78400 255.34900 1156.72900 944.46700
+zoomBox -235.93300 184.56800 1258.78900 995.29500
+zoomBox 151.02400 408.40200 931.27900 831.60700
+zoomBox 388.27600 542.03600 734.48100 729.81500
+zoomBox 167.34600 435.52100 947.60700 858.72900
+zoomBox -26.01600 356.68700 1053.93000 942.44200
+zoomBox -140.84500 301.67900 1129.68000 990.80300
+fit
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report outputs.mtarpt
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report inputs.mtarpt
+zoomBox 27.42900 304.98900 1297.91700 994.09300
+zoomBox -88.51500 234.74800 1406.17700 1045.45900
+zoomBox -223.96900 152.90500 1534.49300 1106.68300
+zoomBox -381.83300 56.99200 1686.94600 1179.08400
+zoomBox -567.11700 -55.40700 1866.74100 1264.70100
+fit
+getAnalysisMode -checkType
+load_timing_debug_report -name default_report outputs.mtarpt
+report_timing -from wdata_in[2] -to wdata_reg_2_/D -group INPUTS
+report_timing -from wdata_in[2] -to wdata_reg_2_/D -group INPUTS -output_format gtd 
+report_timing -from wdata_in[2] -to wdata_reg_2_/D -group INPUTS -output_format gtd > timepathinput.mtarpt

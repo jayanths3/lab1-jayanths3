@@ -1,0 +1,18 @@
+# Cadence Genus(TM) Synthesis Solution, Version 19.12-s121_1, built Dec  3 2019 15:07:17
+
+# Date: Sat Apr 08 21:14:24 2023
+# Host: auto.ece.pdx.edu (x86_64 w/Linux 3.10.0-1160.88.1.el7.x86_64) (1core*60cpus*60physical cpus*Intel Xeon E312xx (Sandy Bridge, IBRS update) 16384KB)
+# OS:   CentOS Linux release 7.9.2009 (Core)
+
+# Cadence Genus(TM) Synthesis Solution, Version 19.12-s121_1, built Dec  3 2019 15:07:17
+
+# Date: Sat Apr 08 21:14:32 2023
+# Host: auto.ece.pdx.edu (x86_64 w/Linux 3.10.0-1160.88.1.el7.x86_64) (1core*60cpus*60physical cpus*Intel Xeon E312xx (Sandy Bridge, IBRS update) 16384KB)
+# OS:   CentOS Linux release 7.9.2009 (Core)
+
+fs
+source ../scripts/genus.tcl
+report_qor
+pwd
+report_qor > /home/jayanths/common/Downloads/lab1-jayanths3-master/genus
+exit

@@ -1,0 +1,251 @@
+Error: Library Compiler executable path is not set. (PT-063)
+setting auto_restore_mw_cel_lib_setup true
+pt_shell> fs
+setting top_design to: 
+fifo1_sram
+pt_shell> source ../scripts/dmsa.tcl
+Launching 8 Distributed Worker(s)
+   1] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   2] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   3] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   4] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   5] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   6] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   7] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+   8] Launched : ssh mo /pkgs/synopsys/pts_vO-2018.06/pts/O-2018.06/bin/pt_shell \
+                  -slv_type dmsa_slv -max_cores 4
+
+  ---------------------------------------------------------------------------
+  Distributed farm creation timeout   : 21600 seconds
+  Waiting for   8 (of   8) workers    : Fri Apr  7 22:21:40 2023
+  Waiting for   0 (of   8) workers    : Fri Apr  7 22:21:50 2023
+  ---------------------------------------------------------------------------
+
+****************************************
+Report : host_usage
+Version: O-2018.06
+Date   : Fri Apr  7 22:21:51 2023
+****************************************
+
+  Options Name          Host Name    Num Processes           Protocol
+  --------------------------------------------------------------------
+  my_opts1              mo           8                       auto
+
+  Options Name     #    Host Name    Job ID    Process ID    Status
+  --------------------------------------------------------------------
+  my_opts1         1    mo           -         3559          ONLINE
+                   2    mo           -         3573          ONLINE
+                   3    mo           -         3570          ONLINE
+                   4    mo           -         3571          ONLINE
+                   5    mo           -         3568          ONLINE
+                   6    mo           -         3562          ONLINE
+                   7    mo           -         3563          ONLINE
+                   8    mo           -         3560          ONLINE
+
+  Usage limits (cores)
+
+  Options Name     #                                         Effective
+  --------------------------------------------------------------------
+  (local process)  -                                         4
+  my_opts1         1                                         4
+                   2                                         4
+                   3                                         4
+                   4                                         4
+                   5                                         4
+                   6                                         4
+                   7                                         4
+                   8                                         4
+  --------------------------------------------------------------------
+  Total                                                      32
+
+pt_shell> report_qor
+****************************************
+Report : qor
+Design : multi-scenario design
+Version: O-2018.06
+Date   : Fri Apr  7 22:24:52 2023
+****************************************
+
+
+Start of Master/Slave Task Processing
+-------------------------------------
+Started    : Command execution in scenario 'func_max'
+Started    : Command execution in scenario 'func_fastslow'
+Started    : Command execution in scenario 'test_fastslow'
+Started    : Command execution in scenario 'func_slowfast'
+Started    : Command execution in scenario 'test_worst'
+Started    : Command execution in scenario 'test_slowfast'
+Started    : Command execution in scenario 'func_min'
+Started    : Command execution in scenario 'test_best'
+Succeeded  : Command execution in scenario 'test_best'
+Succeeded  : Command execution in scenario 'func_min'
+Succeeded  : Command execution in scenario 'func_fastslow'
+Succeeded  : Command execution in scenario 'test_slowfast'
+Succeeded  : Command execution in scenario 'test_worst'
+Succeeded  : Command execution in scenario 'func_slowfast'
+Succeeded  : Command execution in scenario 'test_fastslow'
+Succeeded  : Command execution in scenario 'func_max'
+-----------------------------------
+End of Master/Slave Task Processing
+
+  Timing Path Group 'INPUTS' (max_delay/setup)
+  ---------------------------------------------
+  Levels of Logic:                            3 (func_max)
+  Critical Path Length:                    0.47 (func_max)
+  Critical Path Slack:                     0.07 (func_max)
+  Total Negative Slack:                    0.00
+  No. of Violating Paths:                     0
+  ---------------------------------------------
+
+  Timing Path Group 'OUTPUTS' (max_delay/setup)
+  ---------------------------------------------
+  Levels of Logic:                            6 (func_max)
+  Critical Path Length:                    2.98 (func_max)
+  Critical Path Slack:                    -1.33 (func_max)
+  Total Negative Slack:                  -10.08
+  No. of Violating Paths:                    10
+  ---------------------------------------------
+
+  Timing Path Group 'rclk' (max_delay/setup)
+  ---------------------------------------------
+  Levels of Logic:                           11 (func_max)
+  Critical Path Length:                    1.78 (func_max)
+  Critical Path Slack:                    -0.25 (func_max)
+  Total Negative Slack:                   -0.25
+  No. of Violating Paths:                     1
+  ---------------------------------------------
+
+  Timing Path Group 'wclk' (max_delay/setup)
+  ---------------------------------------------
+  Levels of Logic:                           12 (func_max)
+  Critical Path Length:                    1.76 (func_max)
+  Critical Path Slack:                    -0.33 (func_max)
+  Total Negative Slack:                   -0.45
+  No. of Violating Paths:                     8
+  ---------------------------------------------
+
+  Timing Path Group 'INPUTS' (min_delay/hold)
+  ---------------------------------------------
+  Levels of Logic:                            3 (func_fastslow)
+  Critical Path Length:                    0.20 (func_fastslow)
+  Critical Path Slack:                    -0.13 (func_fastslow)
+  Total Negative Slack:                   -4.02
+  No. of Violating Paths:                    52
+  ---------------------------------------------
+
+  Timing Path Group 'OUTPUTS' (min_delay/hold)
+  ---------------------------------------------
+  Levels of Logic:                            3 (func_fastslow)
+  Critical Path Length:                    1.01 (func_fastslow)
+  Critical Path Slack:                     0.50 (func_fastslow)
+  Total Negative Slack:                    0.00
+  No. of Violating Paths:                     0
+  ---------------------------------------------
+
+  Timing Path Group 'rclk' (min_delay/hold)
+  ---------------------------------------------
+  Levels of Logic:                            3 (func_fastslow)
+  Critical Path Length:                    0.31 (func_fastslow)
+  Critical Path Slack:                     0.00 (func_fastslow)
+  Total Negative Slack:                    0.00
+  No. of Violating Paths:                     0
+  ---------------------------------------------
+
+  Timing Path Group 'wclk' (min_delay/hold)
+  ---------------------------------------------
+  Levels of Logic:                            2 (func_fastslow)
+  Critical Path Length:                    0.29 (func_fastslow)
+  Critical Path Slack:                    -0.01 (func_fastslow)
+  Total Negative Slack:                   -0.02
+  No. of Violating Paths:                     5
+  ---------------------------------------------
+
+  Cell Count
+  ---------------------------------------------
+  Hierarchical Cell Count:                    5 (test_best, func_min, func_fastslow, test_slowfast, test_worst, func_slowfast, test_fastslow, func_max)
+  Hierarchical Port Count:                  201 (test_best, func_min, func_fastslow, test_slowfast, test_worst, func_slowfast, test_fastslow, func_max)
+  Leaf Cell Count:                          653 (test_best, func_min, func_fastslow, test_slowfast, test_worst, func_slowfast, test_fastslow, func_max)
+  ---------------------------------------------
+
+
+  Area
+  ---------------------------------------------
+  Net Interconnect Area:                 765.36 (test_best, func_min, func_fastslow, test_slowfast, test_worst, func_slowfast, test_fastslow, func_max)
+  Total Cell Area:                    371933.84 (test_best, func_min, func_fastslow, test_slowfast, test_worst, func_slowfast, test_fastslow, func_max)
+  Design Area:                        372699.19 (test_best, func_min, func_fastslow, test_slowfast, test_worst, func_slowfast, test_fastslow, func_max)
+  ---------------------------------------------
+
+
+  Design Rule Violations
+  ---------------------------------------------
+  Total No. of Pins in Design:             2661
+  max_capacitance Count:                      7
+  min_capacitance Count:                     64
+  max_capacitance Cost:                   51.61
+  min_capacitance Cost:                    5.70
+  Total DRC Cost:                         57.31
+  ---------------------------------------------
+1
+pt_shell> pwd
+/home/jayanths/common/Downloads/lab1-jayanths3-master/pt/work
+pt_shell> report_qor /home/jayanths/common/Downloads/lab1-jayanths3-master/dmsa
+Error: extra positional option '/home/jayanths/common/Downloads/lab1-jayanths3-master/dmsa' (CMD-012)
+pt_shell> report_qor > /home/jayanths/common/Downloads/lab1-jayanths3-master/dmsa
+pt_shell> exit
+Maximum memory usage for distributed processes:
+my_opts1        1   mo                 601.03 MB
+                2   mo                 600.50 MB
+                3   mo                 600.25 MB
+                4   mo                 600.73 MB
+                5   mo                 600.38 MB
+                6   mo                 600.37 MB
+                7   mo                 600.75 MB
+                8   mo                 600.92 MB
+CPU time usage for distributed processes:
+my_opts1        1   mo                 8 seconds
+                2   mo                 8 seconds
+                3   mo                 8 seconds
+                4   mo                 8 seconds
+                5   mo                 8 seconds
+                6   mo                 8 seconds
+                7   mo                 8 seconds
+                8   mo                 9 seconds
+Elapsed time for distributed processes:
+my_opts1        1   mo                 277 seconds
+                2   mo                 277 seconds
+                3   mo                 277 seconds
+                4   mo                 277 seconds
+                5   mo                 277 seconds
+                6   mo                 277 seconds
+                7   mo                 277 seconds
+                8   mo                 277 seconds
+Maximum memory usage for this session: 871.71 MB
+CPU usage for this session: 2 seconds 
+Elapsed time for this session: 301 seconds
+Shutting down worker processes ...
+ Shutdown Process 1
+ Shutdown Process 2
+ Shutdown Process 3
+ Shutdown Process 4
+ Shutdown Process 5
+ Shutdown Process 6
+ Shutdown Process 7
+ Shutdown Process 8
+Diagnostics summary: 2 errors, 24 informationals
+
+Thank you for using pt_shell!
+

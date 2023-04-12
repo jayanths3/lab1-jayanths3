@@ -1,0 +1,122 @@
+****************************************
+Report : qor
+Design : fifo1_sram
+Version: Q-2019.12-SP4
+Date   : Fri Apr  7 21:39:25 2023
+****************************************
+Information: Timer using 'SI, Timing Window Analysis, CRPR'. (TIM-050)
+
+
+Scenario           'func_slow'
+Timing Path Group  'wclk'
+----------------------------------------
+Levels of Logic:                      0
+Critical Path Length:              2.62
+Critical Path Slack:              -2.30
+Critical Path Clk Period:          1.18
+Total Negative Slack:           -210.84
+No. of Violating Paths:             150
+Worst Hold Violation:              0.00
+Total Hold Violation:              0.00
+No. of Hold Violations:               0
+----------------------------------------
+
+Scenario           'func_slow'
+Timing Path Group  'rclk'
+----------------------------------------
+Levels of Logic:                      3
+Critical Path Length:              3.53
+Critical Path Slack:              -2.43
+Critical Path Clk Period:          1.22
+Total Negative Slack:           -112.38
+No. of Violating Paths:              86
+Worst Hold Violation:              0.00
+Total Hold Violation:              0.00
+No. of Hold Violations:               0
+----------------------------------------
+
+Scenario           'func_slow'
+Timing Path Group  'INPUTS'
+----------------------------------------
+Levels of Logic:                      1
+Critical Path Length:              0.86
+Critical Path Slack:              -0.74
+Critical Path Clk Period:          0.59
+Total Negative Slack:            -32.77
+No. of Violating Paths:              93
+Worst Hold Violation:              0.00
+Total Hold Violation:              0.00
+No. of Hold Violations:               0
+----------------------------------------
+
+Scenario           'func_slow'
+Timing Path Group  'OUTPUTS'
+----------------------------------------
+Levels of Logic:                      3
+Critical Path Length:              3.71
+Critical Path Slack:              -2.06
+Critical Path Clk Period:          1.22
+Total Negative Slack:            -17.64
+No. of Violating Paths:              10
+Worst Hold Violation:              0.00
+Total Hold Violation:              0.00
+No. of Hold Violations:               0
+----------------------------------------
+
+
+Cell Count
+----------------------------------------
+Hierarchical Cell Count:              5
+Hierarchical Port Count:            170
+Leaf Cell Count:                    359
+Buf/Inv Cell Count:                  36
+Buf Cell Count:                       4
+Inv Cell Count:                      32
+CT Buf/Inv Cell Count:                0
+Combinational Cell Count:           255
+   Single-bit Isolation Cell Count:                        0
+   Multi-bit Isolation Cell Count:                         0
+   Isolation Cell Banking Ratio:                           0.00%
+   Single-bit Level Shifter Cell Count:                    0
+   Multi-bit Level Shifter Cell Count:                     0
+   Level Shifter Cell Banking Ratio:                       0.00%
+   Single-bit ELS Cell Count:                              0
+   Multi-bit ELS Cell Count:                               0
+   ELS Cell Banking Ratio:                                 0.00%
+Sequential Cell Count:              104
+   Integrated Clock-Gating Cell Count:                     0
+   Sequential Macro Cell Count:                            8
+   Single-bit Sequential Cell Count:                       96
+   Multi-bit Sequential Cell Count:                        0
+   Sequential Cell Banking Ratio:                          0.00%
+   BitsPerflop:                                            1.00
+Macro Count:                          8
+----------------------------------------
+
+
+Area
+----------------------------------------
+Combinational Area:           300556.32
+Noncombinational Area:           833.59
+Buf/Inv Area:                     60.99
+Total Buffer Area:                 8.13
+Total Inverter Area:              52.86
+Macro/Black Box Area:          69436.17
+Net Area:                             0
+Net XLength:                   84091.30
+Net YLength:                   82118.74
+----------------------------------------
+Cell Area (netlist):                         370826.09
+Cell Area (netlist and physical only):       370826.09
+Net Length:                   166210.05
+
+
+Design Rules
+----------------------------------------
+Total Number of Nets:               518
+Nets with Violations:               133
+Max Trans Violations:                67
+Max Cap Violations:                 112
+----------------------------------------
+
+1

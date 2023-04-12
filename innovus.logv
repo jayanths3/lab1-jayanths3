@@ -1,0 +1,38 @@
+[04/11 16:23:19      0s] 
+[04/11 16:23:19      0s] Cadence Innovus(TM) Implementation System.
+[04/11 16:23:19      0s] Copyright 2019 Cadence Design Systems, Inc. All rights reserved worldwide.
+[04/11 16:23:19      0s] 
+[04/11 16:23:19      0s] Version:	v19.16-s053_1, built Mon Aug 31 13:16:01 PDT 2020
+[04/11 16:23:19      0s] Options:	
+[04/11 16:23:19      0s] Date:		Tue Apr 11 16:23:19 2023
+[04/11 16:23:19      0s] Host:		auto.ece.pdx.edu (x86_64 w/Linux 3.10.0-1160.88.1.el7.x86_64) (1core*60cpus*Intel Xeon E312xx (Sandy Bridge, IBRS update) 16384KB)
+[04/11 16:23:19      0s] OS:		CentOS Linux release 7.9.2009 (Core)
+[04/11 16:23:19      0s] 
+[04/11 16:23:19      0s] License:
+[04/11 16:23:19      0s] 		invs	Innovus Implementation System	19.1	checkout succeeded
+[04/11 16:23:19      0s] 		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+[04/11 16:23:35     13s] @(#)CDS: Innovus v19.16-s053_1 (64bit) 08/31/2020 13:16 (Linux 2.6.32-431.11.2.el6.x86_64)
+[04/11 16:23:35     13s] @(#)CDS: NanoRoute 19.16-s053_1 NR200827-1939/19_16-UB (database version 18.20, 510.7.1) {superthreading v1.53}
+[04/11 16:23:35     13s] @(#)CDS: AAE 19.16-s019 (64bit) 08/31/2020 (Linux 2.6.32-431.11.2.el6.x86_64)
+[04/11 16:23:35     13s] @(#)CDS: CTE 19.16-s019_1 () Aug 22 2020 00:37:42 ( )
+[04/11 16:23:35     13s] @(#)CDS: SYNTECH 19.16-s010_1 () Aug 17 2020 09:10:13 ( )
+[04/11 16:23:35     13s] @(#)CDS: CPE v19.16-s038
+[04/11 16:23:35     13s] @(#)CDS: IQuantus/TQuantus 19.1.3-s268 (64bit) Mon Aug 10 22:57:12 PDT 2020 (Linux 2.6.32-431.11.2.el6.x86_64)
+[04/11 16:23:35     13s] @(#)CDS: OA 22.60-s011 Tue Jun 16 12:27:00 2020
+[04/11 16:23:35     13s] @(#)CDS: SGN 20.10-d001 (01-Jun-2020) (64 bit executable, Qt5.9.0)
+[04/11 16:23:35     13s] @(#)CDS: RCDB 11.14.18
+[04/11 16:23:35     13s] @(#)CDS: STYLUS 19.10-s018_1 (06/12/2020 04:43 PDT)
+[04/11 16:23:35     13s] Create and set the environment variable TMPDIR to /tmp/innovus_temp_31655_auto.ece.pdx.edu_jayanths_ndJiW6.
+
+[04/11 16:23:35     13s] Change the soft stacksize limit to 0.2%RAM (170 mbytes). Set global soft_stack_size_limit to change the value.
+[04/11 16:23:36     14s] 
+[04/11 16:23:36     14s] **INFO:  MMMC transition support version v31-84 
+[04/11 16:23:36     14s] 
+[04/11 16:23:36     14s] <CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+[04/11 16:23:36     14s] <CMD> suppressMessage ENCEXT-2799
+[04/11 16:23:36     14s] <CMD> win
+[04/11 16:23:47     16s] 
+[04/11 16:23:47     16s] *** Memory Usage v#1 (Current mem = 765.965M, initial mem = 297.684M) ***
+[04/11 16:23:47     16s] *** Message Summary: 0 warning(s), 0 error(s)
+[04/11 16:23:47     16s] 
+[04/11 16:23:47     16s] --- Ending "Innovus" (totcpu=0:00:16.9, real=0:00:28.0, mem=766.0M) ---
